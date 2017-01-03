@@ -8,7 +8,7 @@ if (!process.argv[2]) {
   return
 }
 
-queryString = process.argv.splice(2).reduce(function(result, current) {
+queryString = process.argv.splice(2).reduce((result, current) => {
   result += current + " "
   return result
 }, '').trim()
@@ -23,14 +23,14 @@ const grabLink = (url) => {
     gzip: true
   }
   request(options, (err, res, body) => {
-    parseString(body, function(err, result) {
+    parseString(body, (err, result) => {
       if (err) {
         console.log(err)
         console.log('Link Error - Please check your url: ' + url)
         return
       }
       let items = result.urlset['url']
-      items.forEach(function(value, index) {
+      items.forEach((value, index) => {
         if (value['image:image'] !== undefined) {
           let title = value['image:image'][0]['image:title'][0].toLowerCase()
           if (title.indexOf(queryString) > -1) {
